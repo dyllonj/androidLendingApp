@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'loanapplicationpage.dart';
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -19,13 +20,15 @@ class DashboardPage extends StatelessWidget {
                 color: Colors.blueAccent,
                 child: Column(
                   children: [
-                    Text('Current Balance: [balance]', style: TextStyle(fontSize: 20, color: Colors.white)),
-                    Text('Commissary Account: [amount]', style: TextStyle(fontSize: 20, color: Colors.white)),
+                    Text('Current Balance: [balance]',
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                    Text('Commissary Account: [amount]',
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
                   ],
                 ),
               ),
               SizedBox(height: 20),
-              
+
               // Transaction History
               Text('Transaction History', style: TextStyle(fontSize: 18)),
               DataTable(
@@ -50,14 +53,28 @@ class DashboardPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
 
+              // Loan Application Button
+              ElevatedButton(
+                child: Text('Apply for a Loan'),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => LoanApplicationPage()),
+                  );
+                },
+              ),
+              SizedBox(height: 20),
+
               // Educational Notifications
               Container(
                 padding: EdgeInsets.all(20),
                 color: Colors.yellowAccent,
                 child: Column(
                   children: [
-                    Text('Financial Tip of the Day:', style: TextStyle(fontSize: 18)),
-                    Text('Saving even a small amount can lead to big rewards over time.', style: TextStyle(fontSize: 16)),
+                    Text('Financial Tip of the Day:',
+                        style: TextStyle(fontSize: 18)),
+                    Text(
+                        'Saving even a small amount can lead to big rewards over time.',
+                        style: TextStyle(fontSize: 16)),
                   ],
                 ),
               ),
