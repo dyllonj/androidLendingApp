@@ -18,7 +18,6 @@ class _LoanApplicationPageState extends State<LoanApplicationPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            
             // Loan Amount Selection
             Text('Select Loan Amount:', style: TextStyle(fontSize: 18)),
             SizedBox(height: 10),
@@ -37,7 +36,7 @@ class _LoanApplicationPageState extends State<LoanApplicationPage> {
                       (Set<MaterialState> states) {
                         if (selectedAmount == 5.0 && !states.contains(MaterialState.pressed))
                           return Theme.of(context).primaryColor;
-                        return null!; // Use the component's default.
+                        return Theme.of(context).buttonTheme.colorScheme!.secondary; // fallback color
                       },
                     ),
                   ),
@@ -52,9 +51,10 @@ class _LoanApplicationPageState extends State<LoanApplicationPage> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
-                        if (selectedAmount == 10.0 && !states.contains(MaterialState.pressed))
+                        if (selectedAmount == 10.0 &&
+                            !states.contains(MaterialState.pressed))
                           return Theme.of(context).primaryColor;
-                        return null!; // Use the component's default.
+                        return Theme.of(context).buttonTheme.colorScheme!.secondary; // fallback color
                       },
                     ),
                   ),
@@ -69,9 +69,10 @@ class _LoanApplicationPageState extends State<LoanApplicationPage> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
-                        if (selectedAmount == 20.0 && !states.contains(MaterialState.pressed))
+                        if (selectedAmount == 20.0 &&
+                            !states.contains(MaterialState.pressed))
                           return Theme.of(context).primaryColor;
-                        return null!; // Use the component's default.
+                        return Theme.of(context).buttonTheme.colorScheme!.secondary; // fallback color
                       },
                     ),
                   ),
@@ -102,9 +103,11 @@ class _LoanApplicationPageState extends State<LoanApplicationPage> {
             // Submit Button
             ElevatedButton(
               child: Text('Submit Application'),
-              onPressed: acceptedTerms ? () {
-                // Handle the submission logic here
-              } : null,
+              onPressed: acceptedTerms
+                  ? () {
+                      // Handle the submission logic here
+                    }
+                  : null,
             ),
           ],
         ),
