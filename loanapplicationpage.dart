@@ -8,6 +8,24 @@ class LoanApplicationPage extends StatefulWidget {
 class _LoanApplicationPageState extends State<LoanApplicationPage> {
   double? selectedAmount;
   bool acceptedTerms = false;
+  bool useForPhoneCall = false;
+  final double maxLoanAmount = 50.0;
+  final double currentOutstandingLoan = 10.0; // Example value
+  TextEditingController _loanAmountController = TextEditingController();
+
+  void _submitApplication() {
+    if ((currentOutstandingLoan + (selectedAmount ?? 0)) > maxLoanAmount) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Requested amount exceeds allowed limit!')),
+      );
+      return;
+    }
+    // Handle the submission logic here
+    // For demo purposes, we'll just show a snackbar confirming submission.
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Loan application submitted!')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,71 +36,52 @@ class _LoanApplicationPageState extends State<LoanApplicationPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            // Loan Amount Selection
-            Text('Select Loan Amount:', style: TextStyle(fontSize: 18)),
+            // Displaying Allowed Borrow Amount
+            Text(
+              'Allowed to Borrow: \$${maxLoanAmount - currentOutstandingLoan}',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 10),
+
+            // Input Desired Loan Amount
+            TextField(
+              controller: _loanAmountController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Desired Loan Amount',
+                prefixIcon: Icon(Icons.money),
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  selectedAmount = double.tryParse(value);
+                });
+              },
+            ),
+            SizedBox(height: 20),
+
+            // Use for Phone Calls
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  child: Text("\$5"),
-                  onPressed: () {
+                Checkbox(
+                  value: useForPhoneCall,
+                  onChanged: (bool? value) {
                     setState(() {
-                      selectedAmount = 5.0;
+                      useForPhoneCall = value!;
                     });
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        if (selectedAmount == 5.0 && !states.contains(MaterialState.pressed))
-                          return Theme.of(context).primaryColor;
-                        return Theme.of(context).buttonTheme.colorScheme!.secondary; // fallback color
-                      },
-                    ),
-                  ),
                 ),
-                ElevatedButton(
-                  child: Text("\$10"),
-                  onPressed: () {
-                    setState(() {
-                      selectedAmount = 10.0;
-                    });
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        if (selectedAmount == 10.0 &&
-                            !states.contains(MaterialState.pressed))
-                          return Theme.of(context).primaryColor;
-                        return Theme.of(context).buttonTheme.colorScheme!.secondary; // fallback color
-                      },
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  child: Text("\$20"),
-                  onPressed: () {
-                    setState(() {
-                      selectedAmount = 20.0;
-                    });
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        if (selectedAmount == 20.0 &&
-                            !states.contains(MaterialState.pressed))
-                          return Theme.of(context).primaryColor;
-                        return Theme.of(context).buttonTheme.colorScheme!.secondary; // fallback color
-                      },
-                    ),
-                  ),
-                ),
+                Flexible(child: Text('Use loan amount for phone calls')),
               ],
             ),
             SizedBox(height: 20),
 
-            // Other input fields...
-            // You can add other input fields related to the loan application here
+            // Credit History Note
+            Text(
+              'Note: Taking a loan will impact your credit history.',
+              style: TextStyle(color: Colors.red),
+            ),
+            SizedBox(height: 20),
 
             // Terms and Conditions Checkbox
             Row(
@@ -103,11 +102,7 @@ class _LoanApplicationPageState extends State<LoanApplicationPage> {
             // Submit Button
             ElevatedButton(
               child: Text('Submit Application'),
-              onPressed: acceptedTerms
-                  ? () {
-                      // Handle the submission logic here
-                    }
-                  : null,
+              onPressed: acceptedTerms ? _submitApplication : null,
             ),
           ],
         ),
