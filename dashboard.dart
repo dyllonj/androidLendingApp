@@ -29,6 +29,25 @@ class DashboardPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
 
+              // Total Interest Amount Due
+              Text('Total Interest Amount Due: [interestAmount]',
+                  style: TextStyle(fontSize: 20)),
+              SizedBox(height: 20),
+
+              // Total Amount Due
+              Text('Total Amount Due: [totalAmount]',
+                  style: TextStyle(fontSize: 20)),
+              SizedBox(height: 20),
+
+              // Pay Loan Balance with Commissary Account Balance
+              ElevatedButton(
+                child: Text('Pay Loan with Commissary Account'),
+                onPressed: () {
+                  // Handle payment logic here
+                },
+              ),
+              SizedBox(height: 20),
+
               // Transaction History
               Text('Transaction History', style: TextStyle(fontSize: 18)),
               DataTable(
@@ -38,27 +57,46 @@ class DashboardPage extends StatelessWidget {
                   DataColumn(label: Text('Purpose')),
                 ],
                 rows: [
-                  // Add DataRow for each transaction, example:
-                  // DataRow(cells: [DataCell(Text('$50')), DataCell(Text('01/01/2023')), DataCell(Text('Purpose Here'))]),
+                  // Example DataRow
+                  DataRow(cells: [
+                    DataCell(Text('\$50')),
+                    DataCell(Text('01/01/2023')),
+                    DataCell(Text('Purpose Here'))
+                  ]),
                 ],
               ),
               SizedBox(height: 20),
 
-              // Profile Settings
+              // Lend Now Button
               ElevatedButton(
-                child: Text('Profile Settings'),
+                child: Text('Lend Now'),
                 onPressed: () {
-                  // Navigate to profile settings page
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => LoanApplicationPage()),
+                  );
                 },
               ),
               SizedBox(height: 20),
 
-              // Loan Application Button
+              // View Lending History Button
               ElevatedButton(
-                child: Text('Apply for a Loan'),
+                child: Text('View Lending History'),
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => LoanApplicationPage()),
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Lending History'),
+                      content: LendingHistoryPage(),
+                      actions: [
+                        TextButton(
+                          child: Text('Close'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
@@ -85,3 +123,23 @@ class DashboardPage extends StatelessWidget {
     );
   }
 }
+
+class LendingHistoryPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200, // Control height for the pop-up content
+      child: ListView.builder(
+        itemCount: 5, // Example number of items
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text('\$[amount]'), // Replace [amount] with actual data
+            subtitle: Text('Date: [date]'), // Replace [date] with actual data
+          );
+        },
+      ),
+    );
+  }
+}
+
+// Your LoanApplicationPage remains unchanged from above
