@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'loanapplicationpage.dart';
+import 'financialeducationpage.dart';
+// Remember to import the 'financialeducationpage.dart' file once you've created it
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -102,6 +104,19 @@ class DashboardPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
 
+              // Navigation to Financial Education Page
+              ElevatedButton(
+                child: Text('Financial Education'),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => FinancialEducationPage(),
+                    ),
+                  );
+                },
+              ),
+              SizedBox(height: 20),
+
               // Educational Notifications
               Container(
                 padding: EdgeInsets.all(20),
@@ -141,5 +156,3 @@ class LendingHistoryPage extends StatelessWidget {
     );
   }
 }
-
-// Your LoanApplicationPage remains unchanged from above
