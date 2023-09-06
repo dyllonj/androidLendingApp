@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'loanapplicationpage.dart';
 import 'financialeducationpage.dart';
-// Remember to import the 'financialeducationpage.dart' file once you've created it
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -14,44 +13,55 @@ class DashboardPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               // Account Overview
               Container(
                 padding: EdgeInsets.all(20),
                 color: Colors.blueAccent,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Current Balance: [balance]',
-                        style: TextStyle(fontSize: 20, color: Colors.white)),
-                    Text('Commissary Account: [amount]',
-                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                    Center(
+                        child: Text('Current Balance: [balance]',
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white))),
+                    Center(
+                        child: Text('Commissary Account: [amount]',
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white))),
                   ],
                 ),
               ),
               SizedBox(height: 20),
 
-              // Total Interest Amount Due
-              Text('Total Interest Amount Due: [interestAmount]',
-                  style: TextStyle(fontSize: 20)),
+              Center(
+                  child: Text('Total Interest Amount Due: [interestAmount]',
+                      style: const TextStyle(fontSize: 20))),
               SizedBox(height: 20),
 
-              // Total Amount Due
-              Text('Total Amount Due: [totalAmount]',
-                  style: TextStyle(fontSize: 20)),
+              Center(
+                  child: Text('Total Amount Due: [totalAmount]',
+                      style: const TextStyle(fontSize: 20))),
               SizedBox(height: 20),
 
-              // Pay Loan Balance with Commissary Account Balance
-              ElevatedButton(
-                child: Text('Pay Loan with Commissary Account'),
-                onPressed: () {
-                  // Handle payment logic here
-                },
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  child: Text('Pay Loan with Commissary Account',
+                      style: const TextStyle(fontSize: 18)),
+                  onPressed: () {
+                    // Handle payment logic here
+                  },
+                ),
               ),
               SizedBox(height: 20),
 
-              // Transaction History
-              Text('Transaction History', style: TextStyle(fontSize: 18)),
+              Center(
+                  child: Text('Transaction History',
+                      style: const TextStyle(fontSize: 18))),
               DataTable(
                 columns: [
                   DataColumn(label: Text('Amount')),
@@ -59,7 +69,6 @@ class DashboardPage extends StatelessWidget {
                   DataColumn(label: Text('Purpose')),
                 ],
                 rows: [
-                  // Example DataRow
                   DataRow(cells: [
                     DataCell(Text('\$50')),
                     DataCell(Text('01/01/2023')),
@@ -69,65 +78,77 @@ class DashboardPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
 
-              // Lend Now Button
-              ElevatedButton(
-                child: Text('Lend Now'),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => LoanApplicationPage()),
-                  );
-                },
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  child: Text('Lend Now', style: const TextStyle(fontSize: 18)),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => LoanApplicationPage()),
+                    );
+                  },
+                ),
               ),
               SizedBox(height: 20),
 
-              // View Lending History Button
-              ElevatedButton(
-                child: Text('View Lending History'),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: Text('Lending History'),
-                      content: LendingHistoryPage(),
-                      actions: [
-                        TextButton(
-                          child: Text('Close'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  child: Text('View Lending History',
+                      style: const TextStyle(fontSize: 18)),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Lending History'),
+                        content: LendingHistoryPage(),
+                        actions: [
+                          TextButton(
+                            child: Text('Close'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
               SizedBox(height: 20),
 
-              // Navigation to Financial Education Page
-              ElevatedButton(
-                child: Text('Financial Education'),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => FinancialEducationPage(),
-                    ),
-                  );
-                },
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  child: Text('Financial Education',
+                      style: const TextStyle(fontSize: 18)),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => FinancialEducationPage()),
+                    );
+                  },
+                ),
               ),
               SizedBox(height: 20),
 
-              // Educational Notifications
               Container(
                 padding: EdgeInsets.all(20),
                 color: Colors.yellowAccent,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Financial Tip of the Day:',
-                        style: TextStyle(fontSize: 18)),
-                    Text(
-                        'Saving even a small amount can lead to big rewards over time.',
-                        style: TextStyle(fontSize: 16)),
+                    Center(
+                        child: Text('Financial Tip of the Day:',
+                            style: const TextStyle(fontSize: 18))),
+                    Center(
+                        child: Text(
+                            'Saving even a small amount can lead to big rewards over time.',
+                            style: const TextStyle(fontSize: 16))),
                   ],
                 ),
               ),
