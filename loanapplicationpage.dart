@@ -12,6 +12,7 @@ class _LoanApplicationPageState extends State<LoanApplicationPage> {
   final double maxLoanAmount = 50.0;
   final double currentOutstandingLoan = 10.0; // Example value
   TextEditingController _loanAmountController = TextEditingController();
+  TextEditingController _loanPurposeController = TextEditingController();
 
   void _submitApplication() {
     if ((currentOutstandingLoan + (selectedAmount ?? 0)) > maxLoanAmount) {
@@ -57,6 +58,18 @@ class _LoanApplicationPageState extends State<LoanApplicationPage> {
                   selectedAmount = double.tryParse(value);
                 });
               },
+            ),
+            SizedBox(height: 20),
+
+            // Input Loan Purpose
+            TextField(
+              controller: _loanPurposeController,
+              decoration: InputDecoration(
+                labelText: 'Loan Purpose',
+                hintText: 'Enter the purpose of your loan',
+                prefixIcon: Icon(Icons.note),
+                border: OutlineInputBorder(),
+              ),
             ),
             SizedBox(height: 20),
 
