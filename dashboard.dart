@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'loanapplicationpage.dart';
 import 'financialeducationpage.dart';
+import 'faq_page.dart';  // Ensure these are the correct paths
+import 'how_it_works_page.dart';  // Ensure these are the correct paths
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -47,8 +49,7 @@ class DashboardPage extends StatelessWidget {
               SizedBox(height: 20),
 
               Container(
-                width: double.infinity,
-                height: 50,
+                width: MediaQuery.of(context).size.width * 0.6,
                 child: ElevatedButton(
                   child: Text('Pay Loan with Commissary Account',
                       style: const TextStyle(fontSize: 18)),
@@ -60,27 +61,13 @@ class DashboardPage extends StatelessWidget {
               SizedBox(height: 20),
 
               Center(
-                  child: Text('Transaction History',
+                  child: Text('Lending History',
                       style: const TextStyle(fontSize: 18))),
-              DataTable(
-                columns: [
-                  DataColumn(label: Text('Amount')),
-                  DataColumn(label: Text('Date')),
-                  DataColumn(label: Text('Purpose')),
-                ],
-                rows: [
-                  DataRow(cells: [
-                    DataCell(Text('\$50')),
-                    DataCell(Text('01/01/2023')),
-                    DataCell(Text('Purpose Here'))
-                  ]),
-                ],
-              ),
+              Center(child: LendingHistoryWidget()),  // Centered the widget
               SizedBox(height: 20),
 
               Container(
-                width: double.infinity,
-                height: 50,
+                width: MediaQuery.of(context).size.width * 0.6,
                 child: ElevatedButton(
                   child: Text('Lend Now', style: const TextStyle(fontSize: 18)),
                   onPressed: () {
@@ -94,35 +81,7 @@ class DashboardPage extends StatelessWidget {
               SizedBox(height: 20),
 
               Container(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  child: Text('View Lending History',
-                      style: const TextStyle(fontSize: 18)),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text('Lending History'),
-                        content: LendingHistoryPage(),
-                        actions: [
-                          TextButton(
-                            child: Text('Close'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(height: 20),
-
-              Container(
-                width: double.infinity,
-                height: 50,
+                width: MediaQuery.of(context).size.width * 0.6,
                 child: ElevatedButton(
                   child: Text('Financial Education',
                       style: const TextStyle(fontSize: 18)),
@@ -130,6 +89,33 @@ class DashboardPage extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (context) => FinancialEducationPage()),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                child: ElevatedButton(
+                  child: Text('Frequently Asked Questions',
+                      style: const TextStyle(fontSize: 18)),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => FAQPage()),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                child: ElevatedButton(
+                  child: Text('How It Works', style: const TextStyle(fontSize: 18)),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => HowItWorksPage()),
                     );
                   },
                 ),
@@ -160,20 +146,24 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
-class LendingHistoryPage extends StatelessWidget {
+class LendingHistoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200, // Control height for the pop-up content
+      height: 200,
+      width: MediaQuery.of(context).size.width * 0.6,  
       child: ListView.builder(
-        itemCount: 5, // Example number of items
+        itemCount: 5, 
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('\$[amount]'), // Replace [amount] with actual data
-            subtitle: Text('Date: [date]'), // Replace [date] with actual data
+          return Center(  
+            child: ListTile(
+              title: Text('\$[amount]', textAlign: TextAlign.center), 
+              subtitle: Text('Date: [date]', textAlign: TextAlign.center), 
+            ),
           );
         },
       ),
     );
   }
 }
+
