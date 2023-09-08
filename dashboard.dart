@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'loanapplicationpage.dart';
 import 'financialeducationpage.dart';
 import 'support_ticket_page.dart';
+import 'how_it_works_page.dart';
+import 'faq_page.dart';
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -98,6 +100,34 @@ class DashboardPage extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (context) => FinancialEducationPage()),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: 50,
+                child: ElevatedButton(
+                  child: Text('How It Works', style: const TextStyle(fontSize: 18)),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => HowItWorksPage()),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: 50,
+                child: ElevatedButton(
+                  child: Text('Frequently Asked Questions', style: const TextStyle(fontSize: 18)),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => FAQPage()),
                     );
                   },
                 ),
